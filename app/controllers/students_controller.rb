@@ -1,7 +1,9 @@
 class StudentsController < ApplicationController
 
   def index
-    students = Student.all
+    
+    students = params[:name] ? Student.select {|s| s.to_s.downcase.include?(params[:name].downcase)} : Student.all
+    #students = Student.all
     render json: students
   end
 
